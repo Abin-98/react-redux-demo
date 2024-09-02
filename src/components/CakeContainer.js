@@ -1,12 +1,14 @@
-import React from "react";
+import React , {useState} from "react";
 import { buyCake  } from "../redux";
 import { connect } from "react-redux";
 
 const CakeContainer = (props) => {
+  const [num, setNum]=useState(1)
   return (
     <div>
       <h2>Number of cakes - {props.numOfCakes}</h2>
-      <button onClick={props.buyCake}>Buy a cake</button>
+      <button onClick={()=>props.buyCake(num)}>Buy {num} cake&#40;s&#41;</button>
+      <input value={num} onChange={(e)=>setNum(e.target.value)} type="number"/>
     </div>
   );
 }; 
@@ -19,7 +21,7 @@ const mapStateToProps=(state)=>{
 
 const mapDispatchToProps=(dispatch)=>{
     return{
-        buyCake: ()=>dispatch(buyCake())
+        buyCake: (num)=>dispatch(buyCake(num))
     }
 }
 
